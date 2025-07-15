@@ -180,7 +180,7 @@ def word_fun(df_in):
         wrd_cnt_fun[topic] = collections.Counter(tmp.split())
     return wrd_cnt_fun
 
-# Function: Lemma_fun
+# Function: lemma_fun
 # Purpose:  Perform basic lemmatization on a string of text.
 # Input:    str_corpus - a string containing the input text (sentence or document)
 # Output:   A new string with each word reduced to its lemma (base form)
@@ -223,8 +223,23 @@ def stem_fun(str_corpus, flag):
         print("Error: Please provide a valid flag — 'ps' for PorterStemmer or 'wnl' for WordNetLemmatizer.")
         return None
 
-# ALTERNATIVE EFFICIENCY FUNCTIONS 
+# Function: read_pickle
+# Input: path and filename
+# Output: loaded object from pickle file
+def read_pickle(path_in, name_in):
+    import pickle
+    the_data_t = pickle.load(open(path_in + name_in + ".pk", "rb"))
+    return the_data_t
 
+# Function: write_pickle
+# Input: object, path, and filename
+# Output: saves object to pickle file
+def write_pickle(obj_in, path_in, name_in):
+    import pickle
+    pickle.dump(obj_in, open(path_in + name_in + ".pk", "wb"))
+
+
+# ALTERNATIVE EFFICIENCY FUNCTIONS 
 
 # def rem_sw(str_in):
 #     n_l = list()

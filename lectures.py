@@ -99,5 +99,15 @@ PorterStemmer or WordNetLematizer
 #         print("Error: Please provide a valid flag — 'ps' for PorterStemmer or 'wnl' for WordNetLemmatizer.")
 #         return None
     
-    
+
+# def read_pickle(path_in, name_in):
+#     import pickle 
+#     the_data_t = pickle.load(open(path_in + name_in + ".pk", "rb"))
+#     return the_data_t
+
+# def write_pickle(obj_in, path_in, name_in):
+#     import pickle
+#     pickle.dump(obj_in, open(path_in + name_in + ".pk", "wb"))
+
+
 
