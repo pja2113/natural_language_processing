@@ -154,6 +154,19 @@ def rem_sw(text):
     sw = stopwords.words('english')
     return ' '.join([word for word in text.split() if word.lower() not in sw])
 
+# Function: Word Stemming
+# Purpose:  Reduce each word in a string to its root form 
+# Input: A string 
+# Output: A string will all words stemmed 
+
+def stem_fun(str_input):
+    from nltk.stem import PorterStemmer 
+    ps = PorterStemmer()
+    tmp = str_input.split()
+    stemmed_words = [ps.stem(word) for word in tmp]
+    return ' '.join(stemmed_words)
+
+
 #LECTURE SPECIFIC FUNCTIONS 
 
 # Function: Word Counter by Topic
