@@ -20,7 +20,7 @@ Code for NTLK download:
  **lectures.py** - Scratchpad for lectures  
  **HW_1.py** - A file to familiarize myself with basic functionality of Python  
  **/Data** - Datasets downloaded and utilized across all projects in this file  
-
+ **/Outputs** - Output folder for specfic functions and project datasheets 
 
 
 
