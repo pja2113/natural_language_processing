@@ -4,11 +4,16 @@ Created on Mon Jul  7 18:57:07 2025
 
 @author: Philip Auerbach
 """
+import sys
+import os
 
-#from utils import jd_fun, hello_world
-from utils import *
-the_path = "C:/Users/pathouli/Box Sync/myStuff/academia/columbia/socialSciences/GR5067/2025_summer/output/"
-the_d_path = "C:/Users/pathouli/Box Sync/myStuff/academia/columbia/socialSciences/GR5067/2025_summer/data/"
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+from custom_utility.utils import *
+
+
+the_path = "/Users/philipauerbach/Desktop/git projects/NLP-SS Class/NLP-SS/git/lectures.py"
+the_d_path = "/Users/philipauerbach/Desktop/git projects/NLP-SS Class/NLP-SS/git/data/course_data"
 
 the_data = file_crawler(the_d_path)
 
@@ -17,12 +22,12 @@ create a function called tok_cnt that accepts a corpus
 outputs the number of tokens
 """
 
-the_data["num_tok"] = the_data["body"].apply(
-    lambda x: tok_cnt(x, "all"))
-the_data["num_tok_u"] = the_data["body"].apply(
-    lambda x: tok_cnt(x, "u"))
+# the_data["num_tok"] = the_data["body"].apply(
+#     lambda x: tok_cnt(x, "all"))
+# the_data["num_tok_u"] = the_data["body"].apply(
+#     lambda x: tok_cnt(x, "u"))
 
-the_data["body_sw"] = the_data["body"].apply(rem_sw)
+# the_data["body_sw"] = the_data["body"].apply(rem_sw)
 
 """
 Create dictionary where the key is the topic

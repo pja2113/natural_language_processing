@@ -78,10 +78,9 @@ def file_opener(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             return clean_text(f.read())
-    except:
-        print ("Can't open", file_path)
+    except Exception as e:
+        print("Can't open", file_path, "→", e)
         return ''
-        pass
 
 # Function: File Crawler
 # Purpose:  Recursively read and label text files in a directory
@@ -94,10 +93,12 @@ def file_crawler(p_in):
     tmp_d = pd.DataFrame()
     for root, dirs, files in os.walk(p_in, topdown=False):
        for name in files:
-          tmp = root + "/" + name
-          t_txt = file_opener(tmp)
-          if len(t_txt) != 0:
-          #if t_txt is not None: 
+            if not name.lower().endswith(".txt"):
+                continue  # skip non-text files
+            tmp = os.path.join(root, name)
+            t_txt = file_opener(tmp)
+            if len(t_txt) != 0:
+            #if t_txt is not None: 
               t_dir = root.split("/")[-1]
               tmp_pd = pd.DataFrame(
                   {"body": t_txt, "label": t_dir}, index=[0])
@@ -148,6 +149,7 @@ def wrd_fun(df_in):
 # Output: Cleaned string with stopwords removed
     
 def rem_sw(text):
+    
     from nltk.corpus import stopwords
     sw = stopwords.words('english')
     return ' '.join([word for word in text.split() if word.lower() not in sw])
