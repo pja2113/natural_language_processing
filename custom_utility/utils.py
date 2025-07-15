@@ -154,7 +154,17 @@ def rem_sw(text):
     sw = stopwords.words('english')
     return ' '.join([word for word in text.split() if word.lower() not in sw])
 
-#LECTURE SPECIFIC FUNCTIONS 
+# Function: Word Stemming
+# Purpose:  Reduce each word in a string to its root form 
+# Input: A string 
+# Output: A string will all words stemmed 
+
+def stem_fun(str_input):
+    from nltk.stem import PorterStemmer 
+    ps = PorterStemmer()
+    tmp = str_input.split()
+    stemmed_words = [ps.stem(word) for word in tmp]
+    return ' '.join(stemmed_words)
 
 # Function: Word Counter by Topic
 # Purpose:  Count individual word occurrences by topic
@@ -170,10 +180,66 @@ def word_fun(df_in):
         wrd_cnt_fun[topic] = collections.Counter(tmp.split())
     return wrd_cnt_fun
 
+# Function: lemma_fun
+# Purpose:  Perform basic lemmatization on a string of text.
+# Input:    str_corpus - a string containing the input text (sentence or document)
+# Output:   A new string with each word reduced to its lemma (base form)
+
+
+def lemma_fun(str_corpus):
+    from nltk.stem import WordNetLemmatizer
+    wnl = WordNetLemmatizer()
+    tmp = str_corpus.split()
+    lemmatized_corpus = [wnl.lemmatize(word)for word in tmp]
+    return ' '.join(lemmatized_corpus)
+
+# Function: stem_fun
+# Purpose:  Perform stemming or lemmatization on a given text string based on the selected method.
+# Input:    
+#   - str_corpus (str): The input text (sentence or document).
+#   - flag (str): 
+#         -'ps'  → Porter Stemmer (rule-based stemming)
+#         -'wnl' → WordNet Lemmatizer (dictionary-based lemmatization)
+# Output:   
+#   - A processed string where each word has been stemmed or lemmatized.
+#   - If an invalid flag is passed, prints an error message and returns None.
+
+def stem_fun(str_corpus, flag):
+    from nltk.stem import WordNetLemmatizer, PorterStemmer
+
+    if flag == "ps":
+        ps = PorterStemmer()
+        tmp = str_corpus.split()
+        stemmed_words = [ps.stem(word) for word in tmp]
+        return ' '.join(stemmed_words)
+    
+    elif flag == "wnl":
+        wnl = WordNetLemmatizer()
+        tmp = str_corpus.split()
+        lemmatized_corpus = [wnl.lemmatize(word)for word in tmp]
+        return ' '.join(lemmatized_corpus)
+    
+    else: 
+        print("Error: Please provide a valid flag — 'ps' for PorterStemmer or 'wnl' for WordNetLemmatizer.")
+        return None
+
+# Function: read_pickle
+# Input: path and filename
+# Output: loaded object from pickle file
+def read_pickle(path_in, name_in):
+    import pickle
+    the_data_t = pickle.load(open(path_in + name_in + ".pk", "rb"))
+    return the_data_t
+
+# Function: write_pickle
+# Input: object, path, and filename
+# Output: saves object to pickle file
+def write_pickle(obj_in, path_in, name_in):
+    import pickle
+    pickle.dump(obj_in, open(path_in + name_in + ".pk", "wb"))
 
 
 # ALTERNATIVE EFFICIENCY FUNCTIONS 
-
 
 # def rem_sw(str_in):
 #     n_l = list()

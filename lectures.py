@@ -4,151 +4,110 @@ Created on Mon Jul  7 18:57:07 2025
 
 @author: Philip Auerbach
 """
+
+# Importing Libaries 
+from pandasgui import show 
 import sys
 import os
-
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
 from custom_utility.utils import *
 
-
+#Project file paths
 the_path = "/Users/philipauerbach/Desktop/git projects/NLP-SS Class/NLP-SS/git/lectures.py"
 the_d_path = "/Users/philipauerbach/Desktop/git projects/NLP-SS Class/NLP-SS/git/data/course_data"
 
+#File paths 
 the_data = file_crawler(the_d_path)
 
+
+the_data["num_tok"] = the_data["body"].apply(
+     lambda x: tok_cnt(x, "all"))
+the_data["num_tok_u"] = the_data["body"].apply(
+     lambda x: tok_cnt(x, "u"))
+the_data["body_sw"] = the_data["body"].apply(rem_sw)
+
+
+
+
+# cora_a = " i was fishing the river and caught a bunch of fishes"
+
+
+# """
+# Create a function called stem fun that inputs a corpus and 
+# the output is the stemmed version of the original
+# """
+
+# def stem_fun(str_input):
+#     from nltk.stem import PorterStemmer 
+#     ps = PorterStemmer()
+#     tmp = str_input.split()
+#     stemmed_words = [ps.stem(word) for word in tmp]
+#     return ' '.join(stemmed_words)
+
+
+# print(stem_fun(cora_a))
+
 """
-create a function called tok_cnt that accepts a corpus
-outputs the number of tokens
+Create a new column on the_data called body_sw_stem 
+where you will aplly stemming on the body_sw column 
+use word_fun to get frequency for that new column 
+and call the object wrd_fund_body
 """
 
-# the_data["num_tok"] = the_data["body"].apply(
-#     lambda x: tok_cnt(x, "all"))
-# the_data["num_tok_u"] = the_data["body"].apply(
-#     lambda x: tok_cnt(x, "u"))
+wrd_fun_body = word_fun(the_data, "body")
+wrd_fun_body_sw = word_fun(the_data, "body_sw")
 
-# the_data["body_sw"] = the_data["body"].apply(rem_sw)
+the_data["body_sw_stem"] = the_data["body_sw"].apply(stem_fun)
 
-"""
-Create dictionary where the key is the topic
-the value is a dictionary that has 2 keys:
-    all which is the total number of tokens
-    unique which is the unique number of tokens
+wrd_fun_body_sw_stem = word_fun(the_data, "body_sw_stem")
+
+ex = "i was fishing last week and caught a hugh brown trout"
+
+# def Lemma_fun(str_corpus):
+#     from nltk.stem import WordNetLemmatizer
+#     wnl = WordNetLemmatizer()
+#     tmp = corpus.split()
+#     lemmatized_corpus = [wnl.lemmatize(word)for word in tmp]
+#     return ' '.join(lemmatized_corpus)
+
+# def stem_fun(str_input):
+#     from nltk.stem import PorterStemmer 
+#     ps = PorterStemmer()
+#     tmp = str_input.split()
+#     stemmed_words = [ps.stem(word) for word in tmp]
+#     return ' '.join(stemmed_words)
+'''
+create one function called stem_fun that can either perform 
+PorterStemmer or WordNetLematizer
+'''
+# def stem_fun(str_corpus, flag):
+#     from nltk.stem import WordNetLemmatizer, PorterStemmer
+
+#     if flag == "ps":
+#         ps = PorterStemmer()
+#         tmp = str_corpus.split()
+#         stemmed_words = [ps.stem(word) for word in tmp]
+#         return ' '.join(stemmed_words)
     
-test_dict = {"fishing": {"all": 344, "unqiue": 290},
-             "mathematics": {"all": 434, "unqiue": 321}}
-"""
+#     elif flag == "wnl":
+#         wnl = WordNetLemmatizer()
+#         tmp = str_corpus.split()
+#         lemmatized_corpus = [wnl.lemmatize(word)for word in tmp]
+#         return ' '.join(lemmatized_corpus)
+    
+#     else: 
+#         print("Error: Please provide a valid flag — 'ps' for PorterStemmer or 'wnl' for WordNetLemmatizer.")
+#         return None
+    
 
-#tmp = the_data[the_data["label"] == "fishing"]
-# tmp_concat = tmp["body"].str.cat(sep=" ")
+# def read_pickle(path_in, name_in):
+#     import pickle 
+#     the_data_t = pickle.load(open(path_in + name_in + ".pk", "rb"))
+#     return the_data_t
 
-# combined = wrd_fun(the_data)
-
-"""
-create a dictionary where the key is a unique topic
-and the value is the word frequency dictionary key:count
-"""
-
-# a = ["the", "cat", "ran", "up", "the", "hill"]
-
-# a_filt = list()
-# for word in a:
-#     if word != "the":
-#         a_filt.append(word)     
-# corp = " ".join(a_filt) #package up a list into a single string/corpus
-
-# a_filt_b = [word for word in a if word != "the"] #list comprehension
-# corp_a = " ".join(a_filt_b) 
-
-# #dictionary comprehension
-# a_dict = dict()
-# for word in set(a):
-#     a_dict[word] = len(word)
-
-# a = ["the", "cat", "ran", "up", "the", "hill"]
-# a_dict = {word:len(word) for word in set(a)}
-
-
-
-
-"""
-create a function called rem_sw that removes
-all stopwords and returns everything else
-ex input: cat in the hat
-ex output: cat hat
-"""
-
-#t_c = "cat in the hat"
-#print (rem_sw("cat in the hat"))
-
-#inline
-
-#test = word_fun(the_data)
-#print (tok_cnt("cat cat hat", "u"))
-
-#def tok_cnt_u(c_in):
-#    tmp = c_in.split()
-#    tmp = len(set(tmp))
-#    return tmp
-
-#the_data["num_tok"] = the_data["body"].apply(tok_cnt)
-#the_data["num_tok_u"] = the_data["body"].apply(tok_cnt_u)
-
-#sum_stats = the_data.describe()
-
-"""
-create a function called tok_cnt_u that accepts a corpus
-outputs the number of unique tokens 
-"""
-
-
-#summary statistics
-#sum_stats = the_data.describe() #good summary statistics for data section
-#specific stats
-#avg = the_data["num_tok"].std()
-
-#def tok_cnt(c_in):
-#    return len(c_in.split())
-
-"""
-create a function that accepts a path and file name of a .txt file
-and outputs the contents of the file, make sure to run it through
-clean_text
-"""
-
-"""
-refactor the code to NOT include any processed corpus that has 
-no tokens, i.e. its blank, ie empty
-"""
-
-#cover IFs than revisit
-# a = 1
-# b = 4
-# c = 10
-
-# if a > 1:
-#     print ("hello", a)
-# elif b == 3:
-#     print ("hello", b)
-# elif c == 10:
-#     print ("hello", c)
-# elif c < 10:
-#     print ("hello", c)
-# else:
-#     print ("Hello World")
-
-# if a > 1:
-#     print ("hello", a)
-# if b == 3:
-#     print ("hello", b)
-# if c == 10:
-#     print ("hello", c)
-# if c < 10:
-#     print ("hello", c)
-# else:
-#     print ("Hello World")
-
-
+# def write_pickle(obj_in, path_in, name_in):
+#     import pickle
+#     pickle.dump(obj_in, open(path_in + name_in + ".pk", "wb"))
 
 
 

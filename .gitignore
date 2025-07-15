@@ -1,3 +1,11 @@
+
+# Ignore the virtual environment
+.venv/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+=======
 .venv/bin/activate
 .venv/bin/activate.csh
 .venv/bin/activate.fish
@@ -2351,7 +2359,7 @@
 .venv/lib/python3.11/site-packages/PyQt5/Qt5/translations/qtwebengine_ca.qm
 .venv/lib/python3.11/site-packages/PyQt5/Qt5/translations/qtwebengine_de.qm
 .venv/lib/python3.11/site-packages/PyQt5/Qt5/translations/qtwebengine_en.qm
-.venv/lib/python3.11/site-packages/PyQt5/Qt5/translations/qtwebengine_es.qm
+.venv/lib/python3.11/site-packages/P yQt5/Qt5/translations/qtwebengine_es.qm
 .venv/lib/python3.11/site-packages/PyQt5/Qt5/translations/qtwebengine_ko.qm
 .venv/lib/python3.11/site-packages/PyQt5/Qt5/translations/qtwebengine_pl.qm
 .venv/lib/python3.11/site-packages/PyQt5/Qt5/translations/qtwebengine_ru.qm
