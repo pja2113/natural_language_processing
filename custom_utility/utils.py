@@ -166,9 +166,6 @@ def stem_fun(str_input):
     stemmed_words = [ps.stem(word) for word in tmp]
     return ' '.join(stemmed_words)
 
-
-#LECTURE SPECIFIC FUNCTIONS 
-
 # Function: Word Counter by Topic
 # Purpose:  Count individual word occurrences by topic
 # Input: DataFrame with 'label' and 'body' columns
@@ -183,7 +180,48 @@ def word_fun(df_in):
         wrd_cnt_fun[topic] = collections.Counter(tmp.split())
     return wrd_cnt_fun
 
+# Function: Lemma_fun
+# Purpose:  Perform basic lemmatization on a string of text.
+# Input:    str_corpus - a string containing the input text (sentence or document)
+# Output:   A new string with each word reduced to its lemma (base form)
 
+
+def lemma_fun(str_corpus):
+    from nltk.stem import WordNetLemmatizer
+    wnl = WordNetLemmatizer()
+    tmp = str_corpus.split()
+    lemmatized_corpus = [wnl.lemmatize(word)for word in tmp]
+    return ' '.join(lemmatized_corpus)
+
+# Function: stem_fun
+# Purpose:  Perform stemming or lemmatization on a given text string based on the selected method.
+# Input:    
+#   - str_corpus (str): The input text (sentence or document).
+#   - flag (str): 
+#         -'ps'  → Porter Stemmer (rule-based stemming)
+#         -'wnl' → WordNet Lemmatizer (dictionary-based lemmatization)
+# Output:   
+#   - A processed string where each word has been stemmed or lemmatized.
+#   - If an invalid flag is passed, prints an error message and returns None.
+
+def stem_fun(str_corpus, flag):
+    from nltk.stem import WordNetLemmatizer, PorterStemmer
+
+    if flag == "ps":
+        ps = PorterStemmer()
+        tmp = str_corpus.split()
+        stemmed_words = [ps.stem(word) for word in tmp]
+        return ' '.join(stemmed_words)
+    
+    elif flag == "wnl":
+        wnl = WordNetLemmatizer()
+        tmp = str_corpus.split()
+        lemmatized_corpus = [wnl.lemmatize(word)for word in tmp]
+        return ' '.join(lemmatized_corpus)
+    
+    else: 
+        print("Error: Please provide a valid flag — 'ps' for PorterStemmer or 'wnl' for WordNetLemmatizer.")
+        return None
 
 # ALTERNATIVE EFFICIENCY FUNCTIONS 
 
