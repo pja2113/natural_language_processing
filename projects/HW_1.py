@@ -9,10 +9,10 @@ Instructions:
 """
 
 NAME = "Philip Auerbach" 
-UNI = "PJA2113"   # Fill in your UNI
+UNI = "PJA2113"  
 
 import re
-# add other imports if needed
+
 
 def Q1(lst):
     """Question 1: Write a function that takes a list of numbers and returns the sum of all even numbers"""
