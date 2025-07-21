@@ -1,9 +1,4 @@
-the_data["num_tok"] = the_data["body"].apply(
-#     lambda x: tok_cnt(x, "all"))
-# the_data["num_tok_u"] = the_data["body"].apply(
-#     lambda x: tok_cnt(x, "u"))
+wrd_fun_body = word_fun(df, "body")
+wrd_fun_body_sw = word_fun(df, "body_sw")
 
-# the_data["body_sw"] = the_data["body"].apply(rem_sw)
-
-# wrd_fun_body = word_fun(the_data, "body")
-# wrd_fun_body_sw = word_fun(the_data, "body_sw")
+df["body_sw_stem"] = df["body_sw"].apply(stem_fun)
